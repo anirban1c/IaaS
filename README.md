@@ -1,5 +1,5 @@
 # devops
-
+## based on https://github.com/Oxalide/terraform-fargate-example.git
 IaaS consists of 
    1. an ECS container run via Fargate
    2. 2 pods in eu-west-1 & 2
