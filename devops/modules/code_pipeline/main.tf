@@ -111,7 +111,7 @@ resource "aws_codepipeline" "pipeline" {
 
       configuration {
         Owner      = "anirban1c"
-        Repo       = "devops"
+        Repo       = "IaaS"
         Branch     = "master"
       }
     }

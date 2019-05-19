@@ -15,6 +15,7 @@ var (
 	user     = os.Getenv("RDS_USERNAME")
 	password = os.Getenv("RDS_PASSWORD")
 	dbname   = os.Getenv("RDS_DB_NAME")
+	database_url   = os.Getenv("database_url")
 )
 
 // DB is deliberately global as it should live between requests 
@@ -52,7 +53,8 @@ func InitDatabase() (storer CityQueryStorer, retriever CityQueryRetriever, err e
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 
-	db, err = sql.Open("postgres", psqlInfo)
+	//db, err = sql.Open("postgres", psqlInfo)
+	db, err = sql.Open("postgres", database_url)
 	if err != nil {
 		fmt.Println("Unable to connect to database")
 		return
