@@ -15,7 +15,7 @@ resource "aws_key_pair" "key" {
 }
 
 module "networking" {
-  source               = "modules\/networking"
+  source               = "modules/networking"
   environment          = "production"
   vpc_cidr             = "10.0.0.0/16"
   public_subnets_cidr  = ["10.0.1.0/24", "10.0.2.0/24"]
@@ -26,7 +26,7 @@ module "networking" {
 }
 
 module "rds" {
-  source            = "modules\/rds"
+  source            = "modules/rds"
   environment       = "production"
   allocated_storage = "20"
   database_name     = "${var.production_database_name}"
@@ -38,7 +38,7 @@ module "rds" {
 }
 
 module "ecs" {
-  source              = "modules\/ecs"
+  source              = "modules/ecs"
   environment         = "production"
   vpc_id              = "${module.networking.vpc_id}"
   availability_zones  = "${local.production_availability_zones}"
