@@ -50,8 +50,8 @@ type PostgresCityStore struct {
 }
 
 func InitDatabase() (storer CityQueryStorer, retriever CityQueryRetriever, err error) {
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
+	//psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+	//	host, port, user, password, dbname)
 
 	//db, err = sql.Open("postgres", psqlInfo)
 	db, err = sql.Open("postgres", database_url)

@@ -35,7 +35,8 @@ data "template_file" "web_task" {
   vars {
     image           = "${aws_ecr_repository.cleverops_app.repository_url}"
     secret_key_base = "${var.secret_key_base}"
-    database_url    = "postgresql://${var.database_username}:${var.database_password}@${var.database_endpoint}:5432/${var.database_name}?encoding=utf8&pool=40"
+    //database_url    = "postgresql://${var.database_username}:${var.database_password}@${var.database_endpoint}:5432/${var.database_name}?encoding=utf8&pool=40"
+    database_url    = "${var.database_username}:${var.database_password}@${var.database_endpoint}:5432/${var.database_name}?encoding=utf8&pool=40"
     log_group       = "${aws_cloudwatch_log_group.cleverops.name}"
   }
 }
@@ -49,6 +50,7 @@ resource "aws_ecs_task_definition" "web" {
   memory                   = "512"
   execution_role_arn       = "${aws_iam_role.ecs_execution_role.arn}"
   task_role_arn            = "${aws_iam_role.ecs_execution_role.arn}"
+
 }
 
 
@@ -214,11 +216,14 @@ resource "aws_security_group" "ecs_service" {
 /* Simply specify the family to find the latest ACTIVE revision in that family */
 data "aws_ecs_task_definition" "web" {
   task_definition = "${aws_ecs_task_definition.web.family}"
+  depends_on = [ "aws_ecs_task_definition.web" ]
 }
 
 resource "aws_ecs_service" "web" {
   name            = "${var.environment}-web"
   task_definition = "${aws_ecs_task_definition.web.family}:${max("${aws_ecs_task_definition.web.revision}", "${data.aws_ecs_task_definition.web.revision}")}"
+  //task_definition = "${aws_ecs_task_definition.web.arn}"
+
   desired_count   = 2
   launch_type     = "FARGATE"
   cluster =       "${aws_ecs_cluster.cluster.id}"
@@ -233,7 +238,7 @@ resource "aws_ecs_service" "web" {
   load_balancer {
     target_group_arn = "${aws_alb_target_group.alb_target_group.arn}"
     container_name   = "web"
-    container_port   = "80"
+    container_port   = "9090"
   }
 
   depends_on = ["aws_alb_target_group.alb_target_group"]

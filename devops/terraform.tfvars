@@ -4,7 +4,7 @@ domain                        = "cleverops.eu"
 /* rds */
 production_database_name      = "db"
 production_database_username  = "postgres"
-production_database_password  = "3x4mpl3"
+production_database_password  = "3x4mpl31"
 
 // generate - openssl rand -hex 64
 /* secret key */
