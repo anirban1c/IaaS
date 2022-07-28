@@ -43,7 +43,9 @@ export class FluentBitConstruct extends Construct {
           create: true,
         },
         image: {
+          repository: 'cr.fluentbit.io/fluent/fluent-bit',
           pullPolicy: 'Always',
+          tag: 'latest',
         },
         service: {
           type: serviceType,
@@ -57,6 +59,7 @@ export class FluentBitConstruct extends Construct {
             'kubernetes.io/ingress.class': 'nginx',
           },
         },
+
 
       },
 

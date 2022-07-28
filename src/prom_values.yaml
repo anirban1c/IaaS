@@ -5,7 +5,7 @@ podSecurityPolicy:
   enabled: false
 
 imagePullSecrets:
- - name: "image-pull-secret-anirban"
+# - name: "image-pull-secret"
 
 ## Define serviceAccount names for components. Defaults to component's fully qualified name.
 ##
@@ -42,7 +42,7 @@ alertmanager:
 
   ## alertmanager container name
   ##
-  name: alertmanager-anirban
+  name: alertmanager
 
   ## alertmanager container image
   ##
@@ -198,7 +198,7 @@ alertmanager:
     ## If true, alertmanager will create/use a Persistent Volume Claim
     ## If false, use emptyDir
     ##
-    enabled: false
+    enabled: true
 
     ## alertmanager data Persistent Volume access modes
     ## Must match those of existing PV or dynamic provisioner
@@ -245,7 +245,7 @@ alertmanager:
     ##
     subPath: ""
 
-    ## Persistent Volume Claim Selector
+    ## Persistent Volume Claim Selectornn
     ## Useful if Persistent Volumes have been provisioned in advance
     ## Ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#selector
     ##
@@ -254,6 +254,11 @@ alertmanager:
     #    release: "stable"
     #  matchExpressions:
     #    - { key: environment, operator: In, values: [ dev ] }
+
+    ## Persistent Volume Name
+    ## Useful if Persistent Volumes have been provisioned in advance and you want to use a specific one
+    ##
+    # volumeName: ""
 
   emptyDir:
     ## alertmanager emptyDir volume size limit
@@ -289,7 +294,7 @@ alertmanager:
 
   ## Use a StatefulSet if replicaCount needs to be greater than 1 (see below)
   ##
-  replicaCount: 3
+  replicaCount: 1
 
   ## Annotations to be added to deployment
   ##
@@ -299,7 +304,7 @@ alertmanager:
     ## If true, use a statefulset instead of a deployment for pod management.
     ## This allows to scale replicas to more than 1 pod
     ##
-    enabled: true
+    enabled: false
 
     annotations: {}
     labels: {}
@@ -478,7 +483,7 @@ kubeStateMetrics:
 nodeExporter:
   ## If false, node-exporter will not be installed
   ##
-  enabled: true
+  enabled: false
 
   ## If true, node-exporter pods share the host network namespace
   ##
@@ -490,7 +495,7 @@ nodeExporter:
 
   ## If true, node-exporter pods mounts host / at /host/root
   ##
-  hostRootfs: true
+  hostRootfs: false
 
   ## node-exporter container name
   ##
@@ -693,7 +698,7 @@ server:
   ## The URL prefix at which the container can be accessed. Useful in the case the '-web.external-url' includes a slug
   ## so that the various internal URLs are still able to access as they are in the default case.
   ## (Optional)
-  prefixURL: "/prometheus"
+  prefixURL: ""
 
   ## External URL which can access prometheus
   ## Maybe same with Ingress host name
@@ -955,6 +960,11 @@ server:
     #    release: "stable"
     #  matchExpressions:
     #    - { key: environment, operator: In, values: [ dev ] }
+
+    ## Persistent Volume Name
+    ## Useful if Persistent Volumes have been provisioned in advance and you want to use a specific one
+    ##
+    # volumeName: ""
 
   emptyDir:
     ## Prometheus server emptyDir volume size limit
@@ -1388,6 +1398,10 @@ pushgateway:
     ##
     subPath: ""
 
+    ## Persistent Volume Name
+    ## Useful if Persistent Volumes have been provisioned in advance and you want to use a specific one
+    ##
+    # volumeName: ""
 
 ## alertmanager ConfigMap entries
 ##

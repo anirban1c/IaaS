@@ -189,7 +189,7 @@ hostAliases: []
   #     - "my.host.com"
 
 ingress:
-  enabled: true
+  enabled: false
   # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
   # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
   # ingressClassName: nginx
@@ -337,8 +337,8 @@ initChownData:
 
 
 # Administrator credentials when not using an existing secret (see below)
-adminUser: admin
-# adminPassword: strongpassword
+adminUser: 'admin'
+adminPassword: 'admin'
 
 # Use an existing secret for the admin user.
 admin:
@@ -484,15 +484,15 @@ plugins: []
 ## Configure grafana datasources
 ## ref: http://docs.grafana.org/administration/provisioning/#datasources
 ##
-datasources: {}
-#  datasources.yaml:
-#    apiVersion: 1
-#    datasources:
-#    - name: Prometheus
-#      type: prometheus
-#      url: http://prometheus-prometheus-server
-#      access: proxy
-#      isDefault: true
+datasources: 
+ datasources.yaml:
+   apiVersion: 1
+   datasources:
+   - name: Prometheus
+     type: prometheus
+     url: http://prometheus-cdk8s-server
+     access: proxy
+     isDefault: true
 #    - name: CloudWatch
 #      type: cloudwatch
 #      access: proxy

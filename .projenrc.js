@@ -6,7 +6,12 @@ const project = new cdk8s.Cdk8sTypeScriptApp({
   cdk8sCliVersion: '2.0.44',
   constructsVersion: '10.1.12',
 
+  authorName: 'anirban1c',
+  authorEmail: 'anirban_hfx@hotmail.com',
+
+
   deps: [
+    'cdk8s-image',
     '@types/jest',
     '@types/node',
     'cdk8s@^2.2.87',

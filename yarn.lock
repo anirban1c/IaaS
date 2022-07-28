@@ -2407,6 +2407,11 @@ cdk8s-cli@^2.0.44:
     yaml "2.0.0-11"
     yargs "^15"
 
+cdk8s-image@^0.2.194:
+  version "0.2.194"
+  resolved "https://registry.yarnpkg.com/cdk8s-image/-/cdk8s-image-0.2.194.tgz#6f54cc5cabc5e3128bf44d30d180b7d356d5072c"
+  integrity sha512-nfFS0yaqExWdzyNIKsy+HyMuK5QIxRQ/bSF5Glz5BAjkRWlRXSvJUWTykNd0U1CskkBgoIximuPhfr4N6hbwnA==
+
 cdk8s-plus-22@^2.0.0-rc.43, cdk8s-plus-22@^2.0.0-rc.44:
   version "2.0.0-rc.44"
   resolved "https://registry.npmjs.org/cdk8s-plus-22/-/cdk8s-plus-22-2.0.0-rc.44.tgz"

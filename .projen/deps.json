@@ -102,6 +102,10 @@
       "type": "runtime"
     },
     {
+      "name": "cdk8s-image",
+      "type": "runtime"
+    },
+    {
       "name": "cdk8s-plus-22",
       "type": "runtime"
     },

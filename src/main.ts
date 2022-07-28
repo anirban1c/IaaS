@@ -6,6 +6,7 @@ import { Construct } from 'constructs';
 import { ELKConstruct } from './elk';
 import { FluentBitConstruct } from './fluentbit';
 import { GrafanaConstruct } from './grafana';
+import { MetricsServerConstruct } from './metric-server';
 import { PrometheusConstruct } from './prometheus';
 import Utils from './utils';
 
@@ -82,15 +83,29 @@ export class GrafanaChart extends Chart {
   }
 };
 
+export class MetricsServerChart extends Chart {
+  constructor(scope: Construct, id: string, props: ChartProps = {}) {
+    super(scope, id, props);
+
+
+    const values = Utils.loadYaml('../src/metrics-server-values.yaml');
+
+    new MetricsServerConstruct(this, 'yyy-Metrics-Server', values);
+
+
+  }
+};
+
 const app = new App();
 const ns = new NSChart(app, 'ns-anirban-xxx');
-
+//const ms = new MetricsServerChart(app, 'xxx-Metrics-Server');
 const fb = new FBChart(app, 'FluentBit');
 const elk = new ELKChart(app, 'ELK');
 
 new PromChart(app, 'Prometheus');
 new GrafanaChart(app, 'Grafana');
 
+//ns.addDependency(ms);
 ns.addDependency(fb);
 fb.addDependency(elk);
 

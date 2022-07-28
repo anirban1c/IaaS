@@ -47,7 +47,7 @@ export class ELKConstruct extends Construct {
         imagePullPolicy: 'Always',
         // have an ingress
         ingress: {
-          enabled: true,
+          enabled: false,
           host: ['localhost'],
         },
 
