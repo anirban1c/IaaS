@@ -24,7 +24,7 @@ export class FluentBitConstruct extends Construct {
     //const  env = new config.yamlConfig('config');
 
     const replicas = options.replicas ?? 1;
-    const kind = options.kind ?? 'DaemonSet';
+    const kind = options.kind ?? 'Deployment';
     const namespace = options.namespace ?? 'ns-elk';
     const serviceType = options.serviceType ?? ServiceType.CLUSTER_IP;
     const labels = options.labels ?? { app: 'xxxxx-cdk8s-fluentbit' };
@@ -54,13 +54,9 @@ export class FluentBitConstruct extends Construct {
           enabled: true,
         },
         ingress: {
-          enabled: true,
-          annotations: {
-            'kubernetes.io/ingress.class': 'nginx',
-          },
+          enabled: false,
+
         },
-
-
       },
 
     });

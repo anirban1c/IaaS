@@ -1853,7 +1853,13 @@ serverFiles:
 # adds additional scrape configs to prometheus.yml
 # must be a string so you have to add a | after extraScrapeConfigs:
 # example adds prometheus-blackbox-exporter scrape config
-extraScrapeConfigs:
+extraScrapeConfigs: |
+    - job_name: 'fluentbit-prometheus-scrape'
+      metrics_path: '/api/v1/metrics/prometheus'      
+      static_configs:
+      - targets:
+        - fluentbitc-cdk8s-fluent-bit:2020
+      
   # - job_name: 'prometheus-blackbox-exporter'
   #   metrics_path: /probe
   #   params:
